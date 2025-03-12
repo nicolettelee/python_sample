@@ -18,6 +18,9 @@ def main(options):
     # Begin script
     logging_funcs.print_to_log(log_file, "info", "Beginning script.")
 
+    # samplesheet checks
+    samplesheet_df = preprocessing_funcs.samplesheet_checks(options.samplesheet)
+
     # Finish script
     end_timer = time.perf_counter()
     logging_funcs.print_to_log(log_file, "info", "Ending script.")
@@ -26,8 +29,8 @@ def main(options):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--infile", action="store", type=str,
-                        help="Path to infile in string format.")
+    parser.add_argument("--samplesheet", action="store", type=str,
+                        help="Path to samplesheet in string format.")
     parser.add_argument("--outdir", action="store", type=str,
                         help="Path to outdirectory in string format.")
     
