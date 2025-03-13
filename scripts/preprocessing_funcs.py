@@ -34,8 +34,8 @@ def samplesheet_checks(samplesheet_path, log_file):
         sample_df = pd.read_csv(samplesheet_path, sep=",")
     except FileNotFoundError:
         logging_funcs.print_to_log(log_file, "error", f"No samplesheet exists at given location {samplesheet_path}.")
-
-    if not sample_df.columns == ["Sample", "R1_File", "R2_File"]:
+    
+    if not list(sample_df.columns) == ["Sample", "R1_File", "R2_File"]:
         logging_funcs.print_to_log(log_file, "error", f"Samplesheet at {samplesheet_path} does not appear to be formatted correctly.")
         logging_funcs.print_to_log(log_file, "error", 
         f"Ensure that your samplesheet is in comma-delimited format and that it contains the header described in the README, then try again.")
