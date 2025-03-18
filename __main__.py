@@ -1,6 +1,7 @@
 ##!/usr/bin/env python
 
 import argparse
+import os
 import time
 
 from .scripts import logging_funcs, preprocessing_funcs, util_funcs
@@ -30,6 +31,9 @@ def main(options):
     ####################
 
     logging_funcs.print_to_log(log_file, "info", f"Starting Step 1: FastQC on raw reads.")
+    
+    # outdir
+    raw_fastqc_outdir = f"{options.outdir}/01-fastqc_raw"
 
     # not parallelized for now
     # construct commands
@@ -43,7 +47,10 @@ def main(options):
 
         # construct dictionary for inputs & outputs
         vols_dict = {}
-
+        vols_dict[R1_read] = f"/data/inputs/{os.path.basename(R1_read)}"
+        vols_dict[R2_read] = f"/data/inputs/{os.path.basename(R2_read)}"
+        vols_dict[raw_fastqc_outdir] = f"/data/outputs"
+        
         # construct dictionary for general arguments
         args_dict = {}
 

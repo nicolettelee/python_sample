@@ -13,7 +13,7 @@ def setup_outdirectory(outdir):
         outdir: String representing desired location of outdirectory.
         log_file: Python Logger object.
     """
-    folders_to_create = ["logs"]
+    folders_to_create = ["logs", "01-fastqc_raw"]
     for folder in folders_to_create:
         util_funcs.create_dir(f"{outdir}/{folder}")
 

@@ -32,14 +32,14 @@ def run_docker(image_tag, platform, vols_dict, args_dict, log_file, **kwargs):
     cmd = f"docker run --platform {platform}"
 
     # mount volumes
-    for local_path, mount_path in vols_dict:
-        cmd += " -v {local_path}:{mount_path}"
+    for local_path, mount_path in vols_dict.items():
+        cmd += f" -v {local_path}:{mount_path}"
     
     # add tag
-    cmd += f" {image_tag}"
+    cmd += f" -t {image_tag}"
 
     # if included, add command for invocation
-    if invoke_cmd in kwargs:
+    if "invoke_cmd" in kwargs:
         cmd += f" {kwargs['invoke_cmd']}"
     
     # add parameters
